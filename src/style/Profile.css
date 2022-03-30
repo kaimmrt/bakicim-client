@@ -1,0 +1,26 @@
+.profile-card-container{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-img{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.profile-username{
+    margin-top: 20px;
+}
+
+.divider{
+    width: 300px;
+}
+
+.profile-createdAt{
+    display: flex;
+    justify-content: space-between;
+}
