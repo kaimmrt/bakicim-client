@@ -60,7 +60,6 @@ export const userSignIn = ({ email, password, user_type_id }) => {
             user_type_id
         }
         ).then(({ data }) => {
-            console.log(data)
             if (data.result) {
                 localStorage.setItem("token", data.user.token);
                 Axios.defaults.headers.common['x-access-token'] = "Bearer " + data.user.token;
@@ -71,8 +70,9 @@ export const userSignIn = ({ email, password, user_type_id }) => {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('işlem başarısız')
             }
-        }).catch(function (error) {
-            dispatch({ type: FETCH_ERROR, payload: error.message });
+        }).catch(function (err) {
+            dispatch({ type: FETCH_ERROR, payload: err.message });
+            error('Kullanıcı adı veya şifre hatalı!')
         });
     }
 };
@@ -87,7 +87,6 @@ export const getUser = (token) => {
         dispatch({ type: FETCH_START });
         Axios.post('/api/me',
         ).then(({ data }) => {
-            console.log(data)
             if (data.result) {
 
                 dispatch({ type: FETCH_SUCCESS });

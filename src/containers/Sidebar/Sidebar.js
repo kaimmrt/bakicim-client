@@ -66,7 +66,7 @@ const Sidebar = () => {
                                     <h1 className="sidebar_list_item_text">Profilim</h1>
                                 </Link>
                             </li>
-                            <li className="sidebar_list_item" onClick={() => history.push('../profile')}>
+                            <li className="sidebar_list_item" onClick={() => history.push('../ilanlarım')}>
                                 <CgList className="sidebar_list_item_icon" />
                                 <h1 className="sidebar_list_item_text">İlanlarım</h1>
                             </li>

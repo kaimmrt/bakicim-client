@@ -17,6 +17,8 @@ const App = ({ match }) => {
                     <>
                         <Route path={`${match.url}sample`} component={asyncComponent(() => import('./Dashboard/Dashboard'))} />
                         <Route path={`${match.url}profile`} component={asyncComponent(() => import('./Caregiver/Profile/ProfileInfo'))} />
+                        <Route path={`${match.url}ilan_ekle`} component={asyncComponent(() => import('./WorkType/AddWorkType'))} />
+                        <Route path={`${match.url}ilanlarım`} component={asyncComponent(() => import('./WorkType/MyWorkTypes'))} />
                     </>
 
             }

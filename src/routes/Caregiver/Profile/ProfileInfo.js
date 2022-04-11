@@ -9,7 +9,7 @@ const ProfileInfo = () => {
 
     return (
         <div className="app-container">
-            <Card className="profile-card-container">
+            <Card className="card-container">
                 <img src={"https://picsum.photos/200"} className="profile-img" />
                 <h2 className="profile-username">{authUser.username}</h2>
                 <p>{authUser.user_type.user_type}</p>

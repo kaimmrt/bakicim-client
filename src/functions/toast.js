@@ -1,18 +1,18 @@
 import { notification } from "antd";
 
-export function success(title) {
+export function success(content) {
   notification['success']({
-    message: 'Success',
+    message: 'İşlem Başarılı',
     description:
-      title
+      content
   });
 };
 
-export function error(title) {
+export function error(content) {
   notification['error']({
-    message: 'Error',
+    message: 'İşlem Hatası',
     description:
-      title
+      content
   });
 };
 
