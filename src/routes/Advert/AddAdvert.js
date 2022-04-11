@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Select, Card } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { workTypes, createWorkTypePrice } from "../../appRedux/actions"
+import { advertType, createAdvert } from "../../appRedux/actions"
 import CircularProgress from '../../components/CircularProgress/CircularProgress'
 
-const AddWorkType = () => {
+const AddAdvert = () => {
     const dispatch = useDispatch();
-    const { work_types, loading } = useSelector(({ workType }) => workType);
+    const { advert_types, loading } = useSelector(({ advert }) => advert);
     const initialField = [
         {
-            name: ['work_type_id'],
+            name: ['advert_type_id'],
             value: null,
         },
         {
@@ -24,7 +24,7 @@ const AddWorkType = () => {
     const [fields, setFields] = useState(initialField);
 
     const onFinish = (values) => {
-        dispatch(createWorkTypePrice(values))
+        dispatch(createAdvert(values))
         setFields(initialField)
     };
 
@@ -33,8 +33,12 @@ const AddWorkType = () => {
     };
 
     useEffect(() => {
-        dispatch(workTypes())
+        dispatch(advertType())
     }, [])
+
+    useEffect(() => {
+        console.log(loading)
+    })
 
     if (loading) return <CircularProgress />
     return (
@@ -52,7 +56,7 @@ const AddWorkType = () => {
                     labelCol={{ span: 2 }}
                 >
                     <Form.Item
-                        name="work_type_id"
+                        name="advert_type_id"
                         rules={[
                             {
                                 required: true,
@@ -65,8 +69,8 @@ const AddWorkType = () => {
                             bordered={false}
                             className="pr_input"
                         >
-                            {work_types.map((value, index) => (
-                                <Select.Option key={value.work_type_id} value={value.work_type_id}>{value.work_type}</Select.Option>
+                            {advert_types.map((value, index) => (
+                                <Select.Option key={value.advert_type_id} value={value.advert_type_id}>{value.advert_type}</Select.Option>
                             ))}
                         </Select>
                     </Form.Item>
@@ -99,7 +103,7 @@ const AddWorkType = () => {
                             span: 16,
                         }}
                     >
-                        <Button className="pr_button" type="primary" htmlType="submit">
+                        <Button loading={loading} className="pr_button" type="primary" htmlType="submit">
                             Oluştur
                         </Button>
                     </Form.Item>
@@ -109,4 +113,4 @@ const AddWorkType = () => {
     )
 }
 
-export default AddWorkType
+export default AddAdvert

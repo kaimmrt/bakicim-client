@@ -21,8 +21,6 @@ export const setInitUrl = (url) => {
 
 export const userSignUp = ({ values, user_type_id }) => {
     const { email, password, name } = values
-    console.log(values)
-    console.log(email)
     return (dispatch) => {
         dispatch({ type: FETCH_START });
         post('/register', {

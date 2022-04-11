@@ -1,6 +1,8 @@
-import { BsTrash, BsPencil } from 'react-icons/bs'
+import { EditOutlined, EyeOutlined, SettingOutlined, DeleteOutlined } from '@ant-design/icons';
 
 
-export const TrashIcon = BsTrash
-export const PencilIcon = BsPencil
+export const DeleteIcon = DeleteOutlined
+export const SettingIcon = SettingOutlined
+export const EyeIcon = EyeOutlined
+export const EditIcon = EditOutlined
 

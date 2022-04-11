@@ -1,21 +1,39 @@
-import { get, post } from "../../networking/Server";
+import { get, post, remove } from "../../networking/Server";
 import {
-    WORK_TYPES,
-    MY_WORK_TYPE_PRICES,
-    CREATE_WORK_TYPE_PRICE,
+    ADVERT_TYPES,
+    MY_ADVERTS,
+    CREATE_ADVERT,
     FETCH_ERROR,
     FETCH_START,
-    FETCH_SUCCESS
+    FETCH_SUCCESS,
+    DELETE_ADVERT
 } from "./ActionTypes";
 import { success, error } from '../../functions/toast'
 
-export const workTypes = () => {
+export const advertType = () => {
     return (dispatch) => {
         dispatch({ type: FETCH_START });
-        get('/api/work_type').then((data) => {
+        get('/api/advertType/').then((data) => {
             if (data.result) {
                 dispatch({ type: FETCH_SUCCESS });
-                dispatch({ type: WORK_TYPES, payload: data.data });
+                dispatch({ type: ADVERT_TYPES, payload: data.data });
+            } else {
+                dispatch({ type: FETCH_ERROR, payload: data.error });
+                error('Bir şeyler ters gitti gibi')
+            }
+        }).catch(function (error) {
+            dispatch({ type: FETCH_ERROR, payload: error.message });
+        });
+    }
+};
+
+export const myAdverts = () => {
+    return (dispatch) => {
+        dispatch({ type: FETCH_START });
+        get('/api/advert/').then((data) => {
+            if (data.result) {
+                dispatch({ type: FETCH_SUCCESS });
+                dispatch({ type: MY_ADVERTS, payload: data.data });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('Bir şeyler ters gitti')
@@ -26,37 +44,38 @@ export const workTypes = () => {
     }
 };
 
-export const myWorkTypePrices = () => {
+export const createAdvert = (input) => {
     return (dispatch) => {
         dispatch({ type: FETCH_START });
-        get('/api/work_type_price/').then((data) => {
-            if (data.result) {
-                dispatch({ type: FETCH_SUCCESS });
-                dispatch({ type: MY_WORK_TYPE_PRICES, payload: data.data });
-            } else {
-                dispatch({ type: FETCH_ERROR, payload: data.error });
-                error('Bir şeyler ters gitti')
-            }
-        }).catch(function (error) {
-            dispatch({ type: FETCH_ERROR, payload: error.message });
-        });
-    }
-};
-
-export const createWorkTypePrice = (input) => {
-    return (dispatch) => {
-        dispatch({ type: FETCH_START });
-        post('/api/work_type_price/', input).then((data) => {
+        post('/api/advert/', input).then((data) => {
             if (data.result) {
                 success("İlan başarılı bir şekilde oluşturuldu")
                 dispatch({ type: FETCH_SUCCESS });
-                dispatch({ type: CREATE_WORK_TYPE_PRICE, payload: data.data });
+                dispatch({ type: CREATE_ADVERT, payload: data.data });
+            } else {
+                dispatch({ type: FETCH_ERROR, payload: data.error });
+                error('Bir şeyler ters gitti mi acaba')
+            }
+        }).catch(function (err) {
+            dispatch({ type: FETCH_ERROR, payload: err.message });
+            error("Bir şeyler ters gitti gibi duruyor")
+        });
+    }
+};
+
+export const deleteAdvert = (advert_id) => {
+    return (dispatch) => {
+        dispatch({ type: FETCH_START });
+        remove(`/api/advert/${advert_id}`).then((data) => {
+            if (data.result) {
+                success("İlan başarılı bir şekilde silindi")
+                dispatch({ type: FETCH_SUCCESS });
+                dispatch({ type: DELETE_ADVERT, payload: advert_id });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('Bir şeyler ters gitti')
             }
         }).catch(function (err) {
-            console.log(err)
             dispatch({ type: FETCH_ERROR, payload: err.message });
             error("Bir şeyler ters gitti")
         });

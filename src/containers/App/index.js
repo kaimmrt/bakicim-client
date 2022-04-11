@@ -50,7 +50,6 @@ const App = () => {
     }
 
     useEffect(() => {
-        console.log("Auth user:", authUser)
         dispatch(getUser(token));
     }, [dispatch]);
 

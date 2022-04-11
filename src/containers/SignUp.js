@@ -21,7 +21,6 @@ const SignUp = () => {
 
     const onFinish = values => {
         dispatch(userSignUp({ values: values, user_type_id: user_type_id }));
-        console.log(values)
     };
 
     useEffect(() => {

@@ -207,78 +207,51 @@
   color: var(--grey-color);
 }
 
-.my_work_type_container{
+.my_advert_container{
   display: flex;
 	flex-wrap:wrap;
   margin-top: 20px;
 }
 
-.work_type_price_container{
-  width: 250px;
-  margin-right: 20px;
-  border-radius: 10px;
+.advert{
+  width: 300px;
+  margin-right: 25px;
 }
 
-.work_type_price_bar{
-  margin-top: -25px;
-  background-color:#AFACAC;
-  margin-left: -25px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-around;
-  color: white;
-  padding: 5px 10px;
-  width: 50%;
-}
-
-.work_type_price_bar_icon{
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.work_type_price_bar_icon:hover{
-  color: var(--primary-color);
-}
-
-.work_type_price_bar_icon:first-child:hover{
-  color: red;
-}
-
-.work_type_price_item_image{
+.advert_item_image{
   width: 50px;
   height: 50px;
   border-radius: 50%;
 }
 
-.work_type_price_item_header{
+.advert_item_header{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.work_type_price_username{
+.advertUsername{
   margin-left: -50px;
   font-size: 13px;
 }
 
-.work_type_price_price_container{
+.advertPrice_container{
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-.work_type_price_price{
+.advertPrice{
   font-weight: bold;
   color: var(--primary-color);
-  font-size: 22px;
+  font-size: 18px;
   margin-bottom: -0px;
 }
 
-.work_type_price_note{
+.advertNote{
   max-height: 100px;
-  	overflow: hidden;
+  overflow: hidden;
 	text-overflow: ellipsis;
+  height: 300px;
+  margin-bottom: -20px;
 }

@@ -38,8 +38,7 @@ export async function get(adres, log = false) {
       resolve(
         task.then(({ data }) => {
           if (log == true)
-            console.log(data)
-          try { data = JSON.parse(data) } catch { }
+            try { data = JSON.parse(data) } catch { }
           return data;
         }).catch((err) => {
           error()
