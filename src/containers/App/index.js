@@ -44,7 +44,6 @@ const App = () => {
         post('api/me')
             .then(res => {
                 if (res) {
-                    console.log(res)
                 }
             })
     }

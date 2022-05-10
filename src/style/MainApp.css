@@ -211,11 +211,14 @@
   display: flex;
 	flex-wrap:wrap;
   margin-top: 20px;
+
 }
 
 .advert{
   width: 300px;
   margin-right: 25px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .advert_item_image{
@@ -228,6 +231,20 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.not-active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 20px;
+  border-radius:3px ;
+  background-color: red;
+  transform: rotate(-45deg);
+  position: absolute;
+  left: -2px;
+  top: 30px;
 }
 
 .advertUsername{
@@ -255,3 +272,12 @@
   height: 300px;
   margin-bottom: -20px;
 }
+
+.add-button{
+  display: flex;
+  align-items: center;
+  width: 200px;
+  height: 40px;
+  border-radius: 20px;
+}
+

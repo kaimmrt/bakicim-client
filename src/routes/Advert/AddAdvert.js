@@ -6,7 +6,9 @@ import CircularProgress from '../../components/CircularProgress/CircularProgress
 
 const AddAdvert = () => {
     const dispatch = useDispatch();
-    const { advert_types, loading } = useSelector(({ advert }) => advert);
+    const { advert_types } = useSelector(({ advert }) => advert);
+    const { loading } = useSelector(({ common }) => common);
+
     const initialField = [
         {
             name: ['advert_type_id'],
@@ -35,10 +37,6 @@ const AddAdvert = () => {
     useEffect(() => {
         dispatch(advertType())
     }, [])
-
-    useEffect(() => {
-        console.log(loading)
-    })
 
     if (loading) return <CircularProgress />
     return (
@@ -69,7 +67,7 @@ const AddAdvert = () => {
                             bordered={false}
                             className="pr_input"
                         >
-                            {advert_types.map((value, index) => (
+                            {advert_types?.map((value, index) => (
                                 <Select.Option key={value.advert_type_id} value={value.advert_type_id}>{value.advert_type}</Select.Option>
                             ))}
                         </Select>

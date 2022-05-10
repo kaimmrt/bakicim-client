@@ -6,7 +6,8 @@
 }
 
 .app-container {
-  height: 89.95vh;
+  max-height: 89.95vh;
+  overflow: scroll;
   background: #f4f5f7;
   width: 80%;
   padding: 50px;

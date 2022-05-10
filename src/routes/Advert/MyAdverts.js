@@ -5,24 +5,32 @@ import { useSelector, useDispatch } from 'react-redux'
 import { myAdverts } from '../../appRedux/actions'
 import CircularProgress from '../../components/CircularProgress/CircularProgress'
 import AdvertItem from '../../components/AdvertItem/AdvertItem'
+import { PlusIcon } from '../../components/Icons'
 
 const MyAdverts = () => {
     const history = useHistory()
     const dispatch = useDispatch()
-    const { my_adverts, loading } = useSelector(({ advert }) => advert);
+    const { my_adverts } = useSelector(({ advert }) => advert);
+    const { loading } = useSelector(({ common }) => common);
 
     useEffect(() => {
         dispatch(myAdverts())
-    }, [])
+    }, [dispatch])
+
 
     if (loading) return <CircularProgress />
     return (
         <div className="app-container">
             <Card className="card-container">
-                <Button onClick={() => history.push('../ilan_ekle')}>İlan Ekle</Button>
+                <Button className="add-button" onClick={() => history.push('../ilan_ekle')}>
+                    <div>
+                        <PlusIcon style={{ fontSize: 20, marginRight: 20 }} />
+                    </div>
+                    <h4>İlan Ekle</h4>
+                </Button>
                 <div className="my_advert_container" >
                     {
-                        my_adverts.map((value, index) => (
+                        my_adverts?.map((value, index) => (
                             <div key={index}>
                                 <AdvertItem value={value} />
                             </div>

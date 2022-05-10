@@ -19,6 +19,7 @@ const App = ({ match }) => {
                         <Route path={`${match.url}profile`} component={asyncComponent(() => import('./Caregiver/Profile/ProfileInfo'))} />
                         <Route path={`${match.url}ilan_ekle`} component={asyncComponent(() => import('./Advert/AddAdvert'))} />
                         <Route path={`${match.url}ilanlarım`} component={asyncComponent(() => import('./Advert/MyAdverts'))} />
+                        <Route path={`${match.url}ilan_duzenle/:advert_id`} component={asyncComponent(() => import('./Advert/EditAdvert'))} />
                     </>
 
             }
