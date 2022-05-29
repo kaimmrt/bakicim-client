@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Select, Card } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { advertType, createAdvert } from "../../appRedux/actions"
-import CircularProgress from '../../components/CircularProgress/CircularProgress'
+import { advertType, advertTime, createAdvert } from "../../../appRedux/actions"
+import CircularProgress from '../../../components/CircularProgress/CircularProgress'
 
 const AddAdvert = () => {
     const dispatch = useDispatch();
-    const { advert_types } = useSelector(({ advert }) => advert);
+    const { advert_types, advert_times } = useSelector(({ advert }) => advert);
     const { loading } = useSelector(({ common }) => common);
 
     const initialField = [
         {
             name: ['advert_type_id'],
+            value: null,
+        },
+        {
+            name: ['advert_time_id'],
             value: null,
         },
         {
@@ -35,7 +39,10 @@ const AddAdvert = () => {
     };
 
     useEffect(() => {
+        dispatch(advertTime())
         dispatch(advertType())
+        console.log(advert_times)
+        console.log(advert_types)
     }, [])
 
     if (loading) return <CircularProgress />
@@ -69,6 +76,26 @@ const AddAdvert = () => {
                         >
                             {advert_types?.map((value, index) => (
                                 <Select.Option key={value.advert_type_id} value={value.advert_type_id}>{value.advert_type}</Select.Option>
+                            ))}
+                        </Select>
+                    </Form.Item>
+
+                    <Form.Item
+                        name="advert_time_id"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Select
+                            size="large"
+                            placeholder="İlan Süresi"
+                            bordered={false}
+                            className="pr_input"
+                        >
+                            {advert_times?.map((value, index) => (
+                                <Select.Option key={value.advert_time_id} value={value.advert_time_id}>{value.advert_time}</Select.Option>
                             ))}
                         </Select>
                     </Form.Item>

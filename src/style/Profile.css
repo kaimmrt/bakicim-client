@@ -1,7 +1,7 @@
 
 .profile-img{
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
 }
 
@@ -16,4 +16,24 @@
 .profile-createdAt{
     display: flex;
     justify-content: space-between;
+}
+
+.profile-info-item{
+  display: flex;
+  margin-top: 5px;
+  width: 200px;
+  height: 40px;
+  align-items: center;
+}
+
+.profile-info-item-icon{
+  font-size: 23px;
+  margin-right: 10px;
+}
+
+.profile-info-img-container{
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

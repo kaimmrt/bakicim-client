@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Select, Card } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { advertType, editAdvert, findAdvert } from "../../appRedux/actions"
-import CircularProgress from '../../components/CircularProgress/CircularProgress'
+import { advertType, editAdvert, findAdvert } from "../../../appRedux/actions"
+import CircularProgress from '../../../components/CircularProgress/CircularProgress'
 
 const EditAdvert = (props) => {
     const dispatch = useDispatch();
@@ -41,6 +41,7 @@ const EditAdvert = (props) => {
     useEffect(() => {
         dispatch(advertType())
         dispatch(findAdvert(advert_id))
+        console.log(initialField)
     }, [])
 
     if (loading) return <CircularProgress />

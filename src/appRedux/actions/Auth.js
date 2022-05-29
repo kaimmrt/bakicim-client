@@ -1,5 +1,5 @@
 import Axios from "../../networking/Axios";
-import { post } from "../../networking/Server";
+import { post, put } from "../../networking/Server";
 import {
     INIT_URL,
     FETCH_START,
@@ -116,6 +116,25 @@ export const userSignOut = () => {
                 dispatch({ type: SIGNOUT_USER_SUCCESS });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
+            }
+        }).catch(function (error) {
+            dispatch({ type: FETCH_ERROR, payload: error.message });
+        });
+    }
+};
+
+
+export const updateProfile = ({ user_id, data }) => {
+    return (dispatch) => {
+        dispatch({ type: FETCH_START });
+        put(`/api/me/update/${user_id}`, data).then((data) => {
+            if (data.result) {
+                dispatch({ type: FETCH_SUCCESS });
+                dispatch({ type: USER_DATA, payload: data.user });
+                success("Profil güncelleme işlemi başarılı")
+            } else {
+                dispatch({ type: FETCH_ERROR, payload: data.error });
+                error('Bir şeyler ters gitti gibi')
             }
         }).catch(function (error) {
             dispatch({ type: FETCH_ERROR, payload: error.message });

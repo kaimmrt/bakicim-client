@@ -11,15 +11,18 @@ const App = ({ match }) => {
             {
                 authUser.user_type_id == 2
                     ?
-                    <Route path={`${match.url}sample`} component={asyncComponent(() => import('./Dashboard/Dashboard'))} />
-
+                    <>
+                        <Route path={`${match.url}sample`} component={asyncComponent(() => import('./Dashboard/Dashboard'))} />
+                        <Route path={`${match.url}ilanlar`} component={asyncComponent(() => import('./Personal/Advert/AdvertList'))} />
+                    </>
                     :
                     <>
                         <Route path={`${match.url}sample`} component={asyncComponent(() => import('./Dashboard/Dashboard'))} />
                         <Route path={`${match.url}profile`} component={asyncComponent(() => import('./Caregiver/Profile/ProfileInfo'))} />
-                        <Route path={`${match.url}ilan_ekle`} component={asyncComponent(() => import('./Advert/AddAdvert'))} />
-                        <Route path={`${match.url}ilanlarım`} component={asyncComponent(() => import('./Advert/MyAdverts'))} />
-                        <Route path={`${match.url}ilan_duzenle/:advert_id`} component={asyncComponent(() => import('./Advert/EditAdvert'))} />
+                        <Route path={`${match.url}update_profile/`} component={asyncComponent(() => import('./Caregiver/Profile/UpdateProfile'))} />
+                        <Route path={`${match.url}ilan_ekle`} component={asyncComponent(() => import('./Caregiver/Advert/AddAdvert'))} />
+                        <Route path={`${match.url}ilanlarım`} component={asyncComponent(() => import('./Caregiver/Advert/MyAdverts'))} />
+                        <Route path={`${match.url}ilan_duzenle/:advert_id`} component={asyncComponent(() => import('./Caregiver/Advert/EditAdvert'))} />
                     </>
 
             }

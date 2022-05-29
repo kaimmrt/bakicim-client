@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { Card, Button } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { myAdverts } from '../../appRedux/actions'
-import CircularProgress from '../../components/CircularProgress/CircularProgress'
-import AdvertItem from '../../components/AdvertItem/AdvertItem'
-import { PlusIcon } from '../../components/Icons'
+import { myAdverts } from '../../../appRedux/actions'
+import CircularProgress from '../../../components/CircularProgress/CircularProgress'
+import AdvertItem from '../../../components/AdvertItem/AdvertItem'
+import { PlusIcon } from '../../../components/Icons'
 
 const MyAdverts = () => {
     const history = useHistory()

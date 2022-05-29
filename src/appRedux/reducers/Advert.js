@@ -1,8 +1,10 @@
-import { MY_ADVERTS, ADVERT_TYPES, CREATE_ADVERT, DELETE_ADVERT, FIND_ADVERT } from "../actions/ActionTypes";
+import { MY_ADVERTS, ADVERT_TYPES, ADVERT_TIMES, CREATE_ADVERT, DELETE_ADVERT, FIND_ADVERT, ADVERTS } from "../actions/ActionTypes";
 
 const INIT_STATE = {
     advert_types: [],
+    advert_times: [],
     advert: {},
+    adverts: [],
     my_adverts: [],
 };
 
@@ -13,9 +15,19 @@ export default (state = INIT_STATE, action) => {
                 advert_types: action.payload,
             }
         }
+        case ADVERT_TIMES: {
+            return {
+                advert_times: action.payload,
+            }
+        }
         case CREATE_ADVERT: {
             return {
                 ...state
+            }
+        }
+        case ADVERTS: {
+            return {
+                adverts: action.payload
             }
         }
         case MY_ADVERTS: {
