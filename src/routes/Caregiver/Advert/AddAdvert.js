@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Select, Card } from 'antd';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, batch } from 'react-redux';
 import { advertType, advertTime, createAdvert } from "../../../appRedux/actions"
 import CircularProgress from '../../../components/CircularProgress/CircularProgress'
 
@@ -39,10 +39,10 @@ const AddAdvert = () => {
     };
 
     useEffect(() => {
-        dispatch(advertTime())
-        dispatch(advertType())
-        console.log(advert_times)
-        console.log(advert_types)
+        batch(() => {
+            dispatch(advertType())
+            dispatch(advertTime())
+        })
     }, [])
 
     if (loading) return <CircularProgress />

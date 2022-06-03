@@ -21,6 +21,7 @@ export const advertType = () => {
             console.log(data)
             if (data.result) {
                 dispatch({ type: ADVERT_TYPES, payload: data.data });
+                dispatch({ type: FETCH_SUCCESS });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('Bir şeyler ters gitti gibi')
@@ -37,8 +38,8 @@ export const advertTime = () => {
         get('/api/advertTime/').then((data) => {
             console.log(data)
             if (data.result) {
-                dispatch({ type: FETCH_SUCCESS });
                 dispatch({ type: ADVERT_TIMES, payload: data.data });
+                dispatch({ type: FETCH_SUCCESS });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('Bir şeyler ters gitti gibi')
@@ -55,8 +56,8 @@ export const createAdvert = (input) => {
         post('/api/advert/', input).then((data) => {
             if (data.result) {
                 success("İlan başarılı bir şekilde oluşturuldu")
-                dispatch({ type: FETCH_SUCCESS });
                 dispatch({ type: CREATE_ADVERT, payload: data.data });
+                dispatch({ type: FETCH_SUCCESS });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('Bir şeyler ters gitti mi acaba')
@@ -73,8 +74,8 @@ export const allAdverts = () => {
         dispatch({ type: FETCH_START });
         get('/api/advert/').then((data) => {
             if (data.result) {
-                dispatch({ type: FETCH_SUCCESS });
                 dispatch({ type: ADVERTS, payload: data.data });
+                dispatch({ type: FETCH_SUCCESS });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
                 error('Bir şeyler ters gitti')

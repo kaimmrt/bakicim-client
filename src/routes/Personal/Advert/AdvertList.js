@@ -1,23 +1,29 @@
 import React, { useEffect } from 'react'
-import { List, Avatar, Space, Card } from 'antd';
-import { MessageOutlined, HeartOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux';
+import { List, Avatar, Button, Card, Modal, Input } from 'antd';
+import { HeartOutlined } from '@ant-design/icons';
+import { useSelector, useDispatch, batch } from 'react-redux';
 import { useHistory } from 'react-router-dom'
 import moment from 'moment';
 
-import { allAdverts } from '../../../appRedux/actions';
+import { allAdverts, createOffer, createOrDeleteFavorite, fetchFavorites } from '../../../appRedux/actions';
 import CircularProgress from '../../../components/CircularProgress/CircularProgress'
 
 const AdvertList = () => {
     const history = useHistory()
     const dispatch = useDispatch()
 
+    const [isModalVisible, setIsModalVisible] = React.useState(false);
+    const [price, setPrice] = React.useState(1)
+
     const { adverts } = useSelector(({ advert }) => advert);
+    const { favorites } = useSelector(({ favorite }) => favorite);
     const { loading } = useSelector(({ common }) => common);
-    console.log(adverts)
+
     const data = adverts.map((_, i) => ({
+        favorite: favorites.find((fav) => fav.advert_id === _.advert_id),
+        advert_id: _.advert_id,
         href: 'https://ant.design',
-        title: `${_.user.username}`,
+        title: `${_.user.username} - ${_.user.gender.gender}`,
         avatar: 'https://joeschmoe.io/api/v1/random',
         description:
             `${_.advert_type.advert_type} -  ${_.advert_time.advert_time} - ${moment(_.createdAt).format('YYYY-MM-DD')}`,
@@ -25,16 +31,25 @@ const AdvertList = () => {
             `${_.note}`
     }));
 
-    const IconText = ({ icon, text }) => (
-        <Space>
-            {React.createElement(icon)}
-            {text}
-        </Space>
-    );
-
     useEffect(() => {
-        dispatch(allAdverts())
+        batch(() => {
+            dispatch(allAdverts())
+            dispatch(fetchFavorites())
+        })
     }, [dispatch])
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = (item) => {
+        dispatch(createOffer({ price, advert_id: item.advert_id }))
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     if (loading) return <CircularProgress />
     return (
@@ -57,14 +72,22 @@ const AdvertList = () => {
                     }
                     renderItem={(item) => (
                         <List.Item
-                            key={item.title}
+                            key={item.advert_id}
                             actions={[
-                                <IconText icon={HeartOutlined} text="" key="list-vertical-star-o" />,
-                                // <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
+                                <HeartOutlined
+                                    // style={favorites.find((fav) => fav.advert_id === item.advert_id ? { color: 'red' } : {})}
+                                    onClick={() => dispatch(createOrDeleteFavorite({ advert_id: item.advert_id }))}
+                                />,
+                                <>
+                                    <Button onClick={showModal}>Teklif Ver</Button>
+                                    <Modal title="Basic Modal" visible={isModalVisible} onOk={() => handleOk(item)} onCancel={handleCancel}>
+                                        <Input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
+                                    </Modal>
+                                </>
                             ]}
                             extra={
                                 <img
-                                    width={272}
+                                    width={150}
                                     alt="logo"
                                     src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
                                 />
