@@ -17,10 +17,11 @@ const AdvertList = () => {
 
     const { adverts } = useSelector(({ advert }) => advert);
     const { favorites } = useSelector(({ favorite }) => favorite);
+
     const { loading } = useSelector(({ common }) => common);
 
     const data = adverts.map((_, i) => ({
-        favorite: favorites.find((fav) => fav.advert_id === _.advert_id),
+         favorite: favorites.find((fav) => fav.advert_id === _.advert_id),
         advert_id: _.advert_id,
         href: 'https://ant.design',
         title: `${_.user.username} - ${_.user.gender.gender}`,
@@ -42,8 +43,8 @@ const AdvertList = () => {
         setIsModalVisible(true);
     };
 
-    const handleOk = (item) => {
-        dispatch(createOffer({ price, advert_id: item.advert_id }))
+    const handleOk = (id) => {
+        dispatch(createOffer({ price, advert_id: id }))
         setIsModalVisible(false);
     };
 
@@ -75,12 +76,12 @@ const AdvertList = () => {
                             key={item.advert_id}
                             actions={[
                                 <HeartOutlined
-                                    // style={favorites.find((fav) => fav.advert_id === item.advert_id ? { color: 'red' } : {})}
+                                    style={item.favorite ? { background: 'red' } : {}}
                                     onClick={() => dispatch(createOrDeleteFavorite({ advert_id: item.advert_id }))}
                                 />,
                                 <>
                                     <Button onClick={showModal}>Teklif Ver</Button>
-                                    <Modal title="Basic Modal" visible={isModalVisible} onOk={() => handleOk(item)} onCancel={handleCancel}>
+                                    <Modal title="Basic Modal" visible={isModalVisible} onOk={() => handleOk(item.advert_id)} onCancel={handleCancel}>
                                         <Input type="number" value={price} onChange={(e) => setPrice(e.target.value)} />
                                     </Modal>
                                 </>

@@ -12,13 +12,14 @@ export const createOffer = (input) => {
     return (dispatch) => {
         dispatch({ type: FETCH_START });
         post('/api/offer/', input).then((data) => {
+            console.log(data)
             if (data.result) {
                 success("Teklif başarılı bir şekilde oluşturuldu")
                 dispatch({ type: CREATE_OFFER, payload: data.data });
                 dispatch({ type: FETCH_SUCCESS });
             } else {
                 dispatch({ type: FETCH_ERROR, payload: data.error });
-                error('Bir şeyler ters gitti mi acaba')
+                error("İlgili ilana teklif vermiş bulunmaktasınız. İsterseniz teklifinizi güncelleyebilirsiniz.")
             }
         }).catch(function (err) {
             dispatch({ type: FETCH_ERROR, payload: err.message });

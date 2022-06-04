@@ -8,7 +8,6 @@ export default (state = INIT_STATE, action) => {
     switch (action.type) {
         case CREATE_OFFER: {
             return {
-                ...state,
                 my_offers: action.payload
             }
         }
