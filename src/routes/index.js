@@ -14,6 +14,7 @@ const App = ({ match }) => {
                     <>
                         <Route path={`${match.url}sample`} component={asyncComponent(() => import('./Dashboard/Dashboard'))} />
                         <Route path={`${match.url}ilanlar`} component={asyncComponent(() => import('./Personal/Advert/AdvertList'))} />
+                        <Route path={`${match.url}favoriler`} component={asyncComponent(() => import('./Personal/Favorite/MyFavorites'))} />
                     </>
                     :
                     <>

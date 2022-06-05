@@ -17,5 +17,6 @@ export const DELETE_ADVERT = "DELETE_ADVERT";
 export const ADVERTS = "ADVERTS";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const CREATE_FAVORITE = "CREATE_FAVORITE";
+export const MY_FAVORITES = "MY_FAVORITES";
 export const FAVORITES = "FAVORITES";
 export const CREATE_OFFER = "CREATE_OFFER";

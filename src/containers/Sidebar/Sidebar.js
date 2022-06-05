@@ -40,11 +40,11 @@ const Sidebar = () => {
                     authUser.user_type_id == 2
                         ?
                         <>
-                            <li className="sidebar_list_item">
+                            <li className="sidebar_list_item"  onClick={() => history.push('../ilanlar')}>
                                 <img src={require('../../images/logo.png').default} alt='' className="sidebar_list_item_icon" />
                                 <h1 className="sidebar_list_item_text">bakıcım.com</h1>
                             </li>
-                            <li className="sidebar_list_item">
+                            <li className="sidebar_list_item"  onClick={() => history.push('../favoriler')}>
                                 <MdFavoriteBorder className="sidebar_list_item_icon" />
                                 <h1 className="sidebar_list_item_text">Favorilerim</h1>
                             </li>
