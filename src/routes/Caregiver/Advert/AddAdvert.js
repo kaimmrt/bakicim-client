@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Form, Input, Button, Select, Card } from 'antd';
 import { useSelector, useDispatch, batch } from 'react-redux';
-import { advertType, advertTime, createAdvert } from "../../../appRedux/actions"
+import {  advertTime, createAdvert } from "../../../appRedux/actions"
 import CircularProgress from '../../../components/CircularProgress/CircularProgress'
 
 const AddAdvert = () => {
     const dispatch = useDispatch();
-    const { advert_types, advert_times } = useSelector(({ advert }) => advert);
+    const { advert_times } = useSelector(({ advert }) => advert);
     const { loading } = useSelector(({ common }) => common);
 
     const initialField = [
@@ -40,10 +40,9 @@ const AddAdvert = () => {
 
     useEffect(() => {
         batch(() => {
-            dispatch(advertType())
             dispatch(advertTime())
         })
-    }, [])
+    }, [dispatch])
 
     if (loading) return <CircularProgress />
     return (
@@ -74,9 +73,8 @@ const AddAdvert = () => {
                             bordered={false}
                             className="pr_input"
                         >
-                            {advert_types?.map((value, index) => (
-                                <Select.Option key={value.advert_type_id} value={value.advert_type_id}>{value.advert_type}</Select.Option>
-                            ))}
+                                <Select.Option key={1} value={1}>Hasta Bakımı</Select.Option>
+                                <Select.Option key={2} value={2}>Yaşlı Bakımı</Select.Option>
                         </Select>
                     </Form.Item>
 

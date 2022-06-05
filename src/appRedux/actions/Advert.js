@@ -18,7 +18,7 @@ export const advertType = () => {
     return (dispatch) => {
         dispatch({ type: FETCH_START });
         get('/api/advertType/').then((data) => {
-            console.log(data)
+            console.log("advert type", data)
             if (data.result) {
                 dispatch({ type: ADVERT_TYPES, payload: data.data });
                 dispatch({ type: FETCH_SUCCESS });
@@ -87,10 +87,11 @@ export const allAdverts = () => {
     }
 };
 
-export const myAdverts = () => {
+export const myAdverts = (user_id) => {
     return (dispatch) => {
         dispatch({ type: FETCH_START });
-        get('/api/advert/').then((data) => {
+        get(`/api/advert/user/${user_id}`).then((data) => {
+            console.log(data)
             if (data.result) {
                 dispatch({ type: FETCH_SUCCESS });
                 dispatch({ type: MY_ADVERTS, payload: data.data });

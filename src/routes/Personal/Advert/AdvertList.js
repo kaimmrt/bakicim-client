@@ -21,7 +21,7 @@ const AdvertList = () => {
     const { loading } = useSelector(({ common }) => common);
 
     const data = adverts.map((_, i) => ({
-         favorite: favorites.find((fav) => fav.advert_id === _.advert_id),
+        favorite:_.favorite,
         advert_id: _.advert_id,
         href: 'https://ant.design',
         title: `${_.user.username} - ${_.user.gender.gender}`,

@@ -11,6 +11,7 @@ const INIT_STATE = {
 export default (state = INIT_STATE, action) => {
     switch (action.type) {
         case ADVERT_TYPES: {
+            console.log("GELDİ");
             return {
                 advert_types: action.payload,
             }

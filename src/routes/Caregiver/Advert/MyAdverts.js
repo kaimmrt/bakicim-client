@@ -10,11 +10,13 @@ import { PlusIcon } from '../../../components/Icons'
 const MyAdverts = () => {
     const history = useHistory()
     const dispatch = useDispatch()
+
+    const { authUser } = useSelector(({ auth }) => auth);
     const { my_adverts } = useSelector(({ advert }) => advert);
     const { loading } = useSelector(({ common }) => common);
 
     useEffect(() => {
-        dispatch(myAdverts())
+        dispatch(myAdverts(authUser.user_id))
     }, [dispatch])
 
 

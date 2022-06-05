@@ -2,21 +2,26 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useHistory } from 'react-router-dom';
 import { Form, Input, Button, Select, Card } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import { advertType, editAdvert, findAdvert } from "../../../appRedux/actions"
+import { advertTime, editAdvert, findAdvert } from "../../../appRedux/actions"
 import CircularProgress from '../../../components/CircularProgress/CircularProgress'
 
 const EditAdvert = (props) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { advert_id } = useParams();
-    const { advert_types, advert } = useSelector(({ advert }) => advert);
+    const { advert_times, advert } = useSelector(({ advert }) => advert);
     const { loading } = useSelector(({ common }) => common);
 
     const initialField = [
         {
+            name: ['advert_time_id'],
+            value: advert?.advert_time_id,
+        },
+        {
             name: ['advert_type_id'],
             value: advert?.advert_type_id,
         },
+
         {
             name: ['price'],
             value: advert?.price,
@@ -39,7 +44,7 @@ const EditAdvert = (props) => {
 
 
     useEffect(() => {
-        dispatch(advertType())
+        dispatch(advertTime())
         dispatch(findAdvert(advert_id))
         console.log(initialField)
     }, [])
@@ -59,8 +64,8 @@ const EditAdvert = (props) => {
                     autoComplete="off"
                     labelCol={{ span: 2 }}
                 >
-                    <Form.Item
-                        name="advert_type_id"
+                      <Form.Item
+                        name="advert_time_id"
                         rules={[
                             {
                                 required: true,
@@ -69,15 +74,36 @@ const EditAdvert = (props) => {
                     >
                         <Select
                             size="large"
-                            placeholder="İlan Tipi"
+                            placeholder="İlan Süresi"
                             bordered={false}
                             className="pr_input"
                         >
-                            {advert_types?.map((value, index) => (
-                                <Select.Option key={value.advert_type_id} value={value.advert_type_id}>{value.advert_type}</Select.Option>
+                            <Select.Option key={1} value={1}>Hasta Bakımı</Select.Option>
+                            <Select.Option key={2} value={2}>Yaşlı Bakımı</Select.Option>
+                        </Select>
+                    </Form.Item>
+                    
+             
+                    <Form.Item
+                        name="advert_time_id"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Select
+                            size="large"
+                            placeholder="İlan Süresi"
+                            bordered={false}
+                            className="pr_input"
+                        >
+                            {advert_times?.map((value, index) => (
+                                <Select.Option key={value.advert_time_id} value={value.advert_time_id}>{value.advert_time}</Select.Option>
                             ))}
                         </Select>
                     </Form.Item>
+                  
 
                     <Form.Item
                         name="price"
